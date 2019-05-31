@@ -1,15 +1,53 @@
-var VideoListEntry = props => (
-  <div className="video-list-entry media">
-    <div className="media-left media-middle">
-      <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt={props.video.snippet.title} />
-    </div>
-    <div className="media-body">
-      <div className="video-list-entry-title">{props.video.snippet.title}</div>
-      <div className="video-list-entry-detail">{props.video.snippet.description}</div>
-    </div>
-  </div>
-);
+import App from './App.js';
 
+
+var VideoListEntry = (props) => {
+  var displayVideo = (e) => {
+    // event.preventDefault();
+    console.log('testing click');
+    App.video = props.video;
+    App.key = props.video.etag;
+  };
+
+  return (
+    <div className="video-list-entry media">
+      <div className="media-left media-middle">
+        <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt={props.video.snippet.title} />
+      </div>
+      <div className="media-body">
+        <div className="video-list-entry-title" onClick={displayVideo}>{props.video.snippet.title}</div>
+        <div className="video-list-entry-detail">{props.video.snippet.description}</div>
+      </div>
+    </div>
+  );
+};
+
+// class VideoListEntry extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {watching: false};
+//   }
+
+//   displayVideo() {
+//     this.setState({
+//       watching: !this.state.watching
+//     });
+//   }
+
+//   render() {
+//     return (
+//       <div className="video-list-entry media">
+//         <div className="media-left media-middle">
+//           <img className="media-object" src={this.props.video.snippet.thumbnails.default.url} alt={this.props.video.snippet.title} />
+//         </div>
+//         <div className="media-body">
+//           <div className="video-list-entry-title" onClick={this.displayVideo}>{this.props.video.snippet.title}</div>
+//           <div className="video-list-entry-detail">{this.props.video.snippet.description}</div>
+//         </div>
+//       </div>
+//     )
+//   }
+// }
 
 
 
