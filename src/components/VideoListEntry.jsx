@@ -3,22 +3,6 @@ import exampleVideoData from '../data/exampleVideoData.js';
 
 
 var VideoListEntry = (props) => {
-
-
-  // var displayVideo = (e) => {
-  //   event.preventDefault();
-  //   // console.log(e.target);
-  //   App.video = props.video;
-  //   console.log(App.video);
-  //   App.key = props.video.etag;
-  //   // console.log(App.key);
-  //   // exampleVideoData.unshift(App.video)
-  //   // App.setState({
-  //   //   watching: true
-  //   // })
-
-  // };
-
   return (
     <div className="video-list-entry media">
       <div className="media-left media-middle">
