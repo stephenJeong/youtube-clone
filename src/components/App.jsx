@@ -3,11 +3,27 @@ import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {watching: false};
-    this.video = exampleVideoData[0];
-    this.key = exampleVideoData[0].etag;
+  constructor(props) {
+    super(props);
+    this.state = {
+      watching: false,
+      video: exampleVideoData[0],
+      key: exampleVideoData[0].etag,
+    };
+
+    this.displayVideo = this.displayVideo.bind(this);
+  }
+
+
+  //finding the correct function location
+  displayVideo(e) {
+    console.log(e);
+    this.setState({
+      watching: !this.state.watching,
+      video: e.video,
+      key: e.video.etag
+    });
+
   }
 
   render() {
@@ -20,10 +36,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.video} key={this.key}/>
+            <VideoPlayer video={this.state.video} key={this.state.key} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={exampleVideoData} />
+            <VideoList videos={exampleVideoData} onClick={this.displayVideo} />
           </div>
         </div>
       </div>

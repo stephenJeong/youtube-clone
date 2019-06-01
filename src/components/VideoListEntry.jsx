@@ -1,13 +1,23 @@
 import App from './App.js';
+import exampleVideoData from '../data/exampleVideoData.js';
 
 
 var VideoListEntry = (props) => {
-  var displayVideo = (e) => {
-    // event.preventDefault();
-    console.log('testing click');
-    App.video = props.video;
-    App.key = props.video.etag;
-  };
+
+
+  // var displayVideo = (e) => {
+  //   event.preventDefault();
+  //   // console.log(e.target);
+  //   App.video = props.video;
+  //   console.log(App.video);
+  //   App.key = props.video.etag;
+  //   // console.log(App.key);
+  //   // exampleVideoData.unshift(App.video)
+  //   // App.setState({
+  //   //   watching: true
+  //   // })
+
+  // };
 
   return (
     <div className="video-list-entry media">
@@ -15,7 +25,7 @@ var VideoListEntry = (props) => {
         <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt={props.video.snippet.title} />
       </div>
       <div className="media-body">
-        <div className="video-list-entry-title" onClick={displayVideo}>{props.video.snippet.title}</div>
+        <div className="video-list-entry-title" onClick={() => props.onClick(props)}>{props.video.snippet.title}</div>
         <div className="video-list-entry-detail">{props.video.snippet.description}</div>
       </div>
     </div>
