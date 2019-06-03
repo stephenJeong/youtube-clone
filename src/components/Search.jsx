@@ -1,11 +1,31 @@
-var Search = () => (
-  <div className="search-bar form-inline">
-    <input className="form-control" type="text" />
-    <button className="btn hidden-sm-down" onClick={()=>console.log('you have submitted')}>
-      <span className="glyphicon glyphicon-search"></span>
-    </button>
-  </div>
-);
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.state ={
+    //   input: ''
+    // };
+    this.input = '';
+    this.handleChangeSearch = this.handleChangeSearch.bind(this);
+  }
+
+  handleChangeSearch(event) {
+    // this.setState({
+    //   input: event.target.value
+    // })
+    this.input = event.target.value;
+  }
+
+  render() {
+    return (
+      <div className="search-bar form-inline">
+        <input className="form-control" type="text" onChange={this.handleChangeSearch} />
+        <button className="btn hidden-sm-down" onClick={this.props.get(this.input)}>
+          <span className="glyphicon glyphicon-search"></span>
+        </button>
+      </div>
+    );
+  }
+}
 
 
 
