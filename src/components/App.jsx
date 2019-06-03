@@ -1,6 +1,9 @@
 import exampleVideoData from '../data/exampleVideoData.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
+import Search from './Search.js'
+// import searchYouTube from './lib/searchYouTube.js'
+// import YOUTUBE_API_KEY from './config/youtube.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -8,12 +11,16 @@ class App extends React.Component {
     this.state = {
       watching: false,
       video: exampleVideoData[0],
-      key: exampleVideoData[0].etag,
+      // key: videos[0].etag,
+      videos: []
     };
 
     this.displayVideo = this.displayVideo.bind(this);
   }
 
+  componentDidMount() {
+    this.get('hack reactor');
+  }
 
   //finding the correct function location
   displayVideo(e) {
@@ -23,15 +30,34 @@ class App extends React.Component {
       video: e.video,
       key: e.video.etag
     });
-
   }
+
+  get(query){
+    // searchYouTube({
+    //   key: YOUTUBE_API_KEY,
+    //   query: query
+    // }, callback)
+    var options = {
+      key: this.props.API_KEY,
+      query: query
+    }
+    
+    this.props.searchYouTube(options, (videos) => {
+      this.setState({
+        videos: videos,
+        video: videos[0]
+      })
+    })
+  }
+
+
 
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <Search />
           </div>
         </nav>
         <div className="row">
@@ -39,7 +65,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.video} key={this.state.key} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={exampleVideoData} onClick={this.displayVideo} />
+            <VideoList videos={this.state.videos} onClick={this.displayVideo} />
           </div>
         </div>
       </div>
